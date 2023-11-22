@@ -25,9 +25,9 @@ def read_root():
     return {"Hello": "World"}
 
 
-@app.post("/summarise/")
-def create_item(text_to_summarise: TextToSummarise):
-    summary = summarizer([text_to_summarise.text[:500]])
-    summarized_text = summary[0]["summary_text"]
-
-    return {"summarized_text": summarized_text}
+@app.post("/get_entities/")
+def create_item(text_to_extract_entities: TextToExtractEntities):
+    named_entities = ner(text_to_extract_entities.text)
+    for entity in named_entities:
+        entity["score"] = float(entity["score"])
+    return JSONResponse(named_entities)
