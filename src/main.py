@@ -31,3 +31,12 @@ def create_item(text_to_extract_entities: TextToExtractEntities):
     for entity in named_entities:
         entity["score"] = float(entity["score"])
     return JSONResponse(named_entities)
+
+
+@app.get("/get_classification/")
+def read_item(
+    text_to_classify: str, classification_labels: Annotated[List[str], Query()] = None
+):
+    labels = zero_shot_model(text_to_classify, classification_labels)
+
+    return labels
