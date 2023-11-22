@@ -6,17 +6,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 
-def initialise_ai_model():
-    logging.warning("Downloading model, this could take some time....")
-    summarizer = pipeline(model="google/pegasus-xsum")
-    logging.warning("Finished Downloading model. App should now be good to go.")
-    return summarizer
-
-
-summarizer = initialise_ai_model()
-
-
-class TextToSummarise(BaseModel):
+class TextToExtractEntities(BaseModel):
     text: str
 
 
