@@ -1,6 +1,7 @@
 import logging
+from typing import Annotated, List
 from transformers import pipeline
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 

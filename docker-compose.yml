@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  entityrecognitionapi:
+    image: entityrecognitionapi
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 8080:8080
+  nodered:
+    image: nodered/node-red:latest
+    ports:
+      - 1880:1880
+    volumes:
+      - node_red_data:/data
+volumes:
+  node_red_data: 
+    driver: local
+
+    
+    
+
+    
