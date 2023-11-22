@@ -2,6 +2,21 @@ import logging
 from transformers import pipeline
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.responses import JSONResponse
+
+
+def initialise_ner_ai_model():
+    return pipeline("ner", grouped_entities=True)
+
+
+def initialise_zero_shot_ai_model():
+    return pipeline("zero-shot-classification")
+
+
+logging.warning("Downloading model, this could take some time....")
+ner = initialise_ner_ai_model()
+zero_shot_model = initialise_zero_shot_ai_model()
+logging.warning("Finished Downloading model. App should now be good to go.")
 
 app = FastAPI()
 
